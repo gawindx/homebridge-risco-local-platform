@@ -1,0 +1,41 @@
+{
+  "name": "homebridge-risco-local-platform",
+  "displayName": "Homebridge Risco Local Platform",
+  "version": "0.1.0",
+  "description": "RiscoAlarm on Local Network Plugin Platform for Homebridge",
+  "homepage": "https://github.com/gawindx/homebridge-risco-local-platform#readme",
+  "license": "MIT",
+  "author": "Gawindx",
+  "publishConfig": {
+    "cache": "~/.npm",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gawindx/homebridge-risco-local-platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gawindx/homebridge-risco-local-platform/issues"
+  },
+  "main": "app.js",
+  "engines": {
+    "homebridge": ">=1.1.6",
+    "node": ">=10.17.0"
+  },
+  "scripts": {
+    "start": "node app"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge-platform",
+    "platform",
+    "risco",
+    "alarm",
+    "homekit",
+    "homebridge",
+    "tcp/ip"
+  ],
+  "dependencies": {
+    "risco-lan-bridge": "^0.9.8"
+  }
+}

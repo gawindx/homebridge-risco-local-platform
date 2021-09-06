@@ -1,0 +1,40 @@
+{
+    "accessories": [
+        {
+            "platform": "RiscoLocalAlarm",
+            "Panel_IP": "192.168.0.100",
+            "Panel_Port": 1000,
+            "Panel_Model": "agility|lightsys|wicomm|wicommpro|prosysplus|gtplus",
+            "Panel_Password": 5678,
+            "Panel_Key": 1,
+            "OccupancyPreventArming": true|false,
+            "SystemMode": true|false,
+            "AddPanel2FirstPart": true|false,
+            "Partition": "none|all|0,1,..",
+            "Outputs": "all|none|0,1,2,....",
+            "Detectors": "all|none|0,1,2,....",
+            "Custom": {
+                "Door": "all|0,1,2,....",
+                "Window": "all|0,1,2,....",
+                "Contact Sensor": "all|0,1,2,....",
+                "Vibrate Sensor": "all|0,1,2,....",
+                "Smoke Sensor": "all|0,1,2,....",
+                "Water Sensor": "all|0,1,2,....",
+                "Gas Sensor": "all|0,1,2,....",
+                "Co Sensor": "all|0,1,2,....",
+                "Temperature Sensor": "all|0,1,2,....",
+            },
+            "Combined": {
+                "Door": [
+                    {"In": "X", "Out": "Y"}
+                ],
+                "Window": [
+                    {"In": "X", "Out": "Y"}
+                ],
+                "GarageDoor": [
+                    {"In": "X", "Out": "Y"}
+                ]
+            }
+        }
+    ]
+}
