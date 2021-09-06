@@ -183,7 +183,7 @@ Discovering Detector : "Zone 02" with Id: 2
 
 ## TODO:
 * Add Cameras
-* Added PirCam support
+* Added PirCam support (will only be possible if TJForc itself brings this functionality to its bridge)
 
 For more information on the protocol and compatibility with the different Risco control panels, see here:
 [Risco-lan-bridge](https://github.com/TJForc/risco-lan-bridge#readme)
