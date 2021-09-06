@@ -158,7 +158,7 @@ Fields:
 
 ### Method 1 : You know the configuration of your system
 In this case it is very simple.
-Just take the zone number and remove 1.
+Just take the zone number.
 
 Example:
 
@@ -176,9 +176,9 @@ When the plugin is launched, the information is disseminated and can be read dir
 
 Locate the lines resembling these to directly obtain the Id to use in the config.json file:
 ```
-Add Accessory => Add Detectors
-Add Accessory => Configuration for Detectors Id : 0 and labeled "Batiment"
-Add Accessory => Configuration for Detectors Id : 1 and labeled "Pte Garage"
+Accessories Init Phase Started
+Discovering Detector : "Zone 01" with Id: 1
+Discovering Detector : "Zone 02" with Id: 2
 ```
 
 ## TODO:
