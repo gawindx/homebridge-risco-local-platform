@@ -98,6 +98,7 @@ class RiscoLanPlatform {
         this.Outputs = ((this.Config['Outputs'] !== undefined) ? this.Config['Outputs'] : 'all');
         this.SystemMode = ((this.Config['SystemMode'] !== undefined) ? this.Config['SystemMode'] : false);
         this.AddPanel2FirstPart = ((this.Config['AddPanel2FirstPart'] !== undefined) ? this.Config['AddPanel2FirstPart'] : true);
+        this.Custom = ((this.Config['Custom'] !== undefined) ? this.Config['Custom'] : 'none');
         this.DiscoveredAccessories = {};
         this.Devices = [];
         this.DiscoveryFinished = false;
@@ -158,6 +159,27 @@ class RiscoLanPlatform {
             this.DiscoveredAccessories.Partitions = this.PreInitPartition(UsuablePartitions);
             this.log.debug(`Found ${UsuablePartitions.length} Partition(s)`);
 
+            if (( this.Custom != 'none') && (this.DiscoveredAccessories.Detectors !== undefined)) {
+                this.log.info('Apply Custom Configuration');
+                for (var Custom_Type in this.Custom_Types) {
+                    this.log(`Modify Detectors to ${this.Custom_Types[Custom_Type]}`);
+                    if ((this.Custom[this.Custom_Types[Custom_Type]] || 'none') != 'none') {
+                        if (this.Custom[this.Custom_Types[Custom_Type]] == 'all') {
+                            for (var Detector in this.DiscoveredAccessories.Detectors) {
+                                this.DiscoveredAccessories.Detectors[Detector].accessorytype = this.Custom_Types[Custom_Type];
+                            }
+                        } else if (this.Custom[this.Custom_Types[Custom_Type]] != (this.Custom[this.Custom_Types[Custom_Type]].split(',')) || ( parseInt(this.Custom[this.Custom_Types[Custom_Type]]) != NaN )) {
+                            const Modified_Detectors = this.Custom[this.Custom_Types[Custom_Type]].split(',').map(function(item) {
+                                return parseInt(item, 10);
+                            });
+                            Object.values(Modified_Detectors).forEach( Id_Detector => {
+                                this.log.debug('Detector Name/Id: %s/%s Modified to %s', this.DiscoveredAccessories.Detectors[Id_Detector].name, this.DiscoveredAccessories.Detectors[Id_Detector].Id, this.Custom_Types[Custom_Type]);
+                                this.DiscoveredAccessories.Detectors[Id_Detector].accessorytype = this.Custom_Types[Custom_Type];
+                            });
+                        }
+                    }
+                }
+            }
             if (((this.Config['Combined'] || 'none') != 'none') && (this.DiscoveredAccessories.Detectors !== undefined) && (this.DiscoveredAccessories.Outputs !== undefined)) {
                 this.DiscoveredAccessories.Combineds = this.PreInitCombined(this.Config['Combined'], UsuableZones, UsuableOutputs);
                 this.log.info(`Creation of ${Object.keys(this.DiscoveredAccessories.Combineds).length} Combined Accessories`);
