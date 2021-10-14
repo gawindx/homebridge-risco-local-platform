@@ -161,24 +161,24 @@ class RiscoLanPlatform {
 
             if (( this.Custom != 'none') && (this.DiscoveredAccessories.Detectors !== undefined)) {
                 this.log.info('Apply Custom Configuration');
-                for (var Custom_Type in this.Custom_Types) {
-                    this.log(`Modify Detectors to ${this.Custom_Types[Custom_Type]}`);
-                    if ((this.Custom[this.Custom_Types[Custom_Type]] || 'none') != 'none') {
-                        if (this.Custom[this.Custom_Types[Custom_Type]] == 'all') {
+                Object.values(this.Custom_Types).forEach( Custom_Type => {
+                    this.log(`Modify Detectors to ${Custom_Type}`);
+                    if ((this.Custom[Custom_Type] || 'none') != 'none') {
+                        if (this.Custom[Custom_Type] == 'all') {
                             for (var Detector in this.DiscoveredAccessories.Detectors) {
-                                this.DiscoveredAccessories.Detectors[Detector].accessorytype = this.Custom_Types[Custom_Type];
+                                this.DiscoveredAccessories.Detectors[Detector].accessorytype = Custom_Type;
                             }
-                        } else if (this.Custom[this.Custom_Types[Custom_Type]] != (this.Custom[this.Custom_Types[Custom_Type]].split(',')) || ( parseInt(this.Custom[this.Custom_Types[Custom_Type]]) != NaN )) {
-                            const Modified_Detectors = this.Custom[this.Custom_Types[Custom_Type]].split(',').map(function(item) {
+                        } else if (this.Custom[Custom_Type] != (this.Custom[Custom_Type].split(',')) || ( parseInt(this.Custom[Custom_Type]) != NaN )) {
+                            const Modified_Detectors = this.Custom[Custom_Type].split(',').map(function(item) {
                                 return parseInt(item, 10);
                             });
                             Object.values(Modified_Detectors).forEach( Id_Detector => {
-                                this.log.debug('Detector Name/Id: %s/%s Modified to %s', this.DiscoveredAccessories.Detectors[Id_Detector].name, this.DiscoveredAccessories.Detectors[Id_Detector].Id, this.Custom_Types[Custom_Type]);
-                                this.DiscoveredAccessories.Detectors[Id_Detector].accessorytype = this.Custom_Types[Custom_Type];
+                                this.log.debug(`Detector Name/Id: ${this.DiscoveredAccessories.Detectors[Id_Detector].name}/${this.DiscoveredAccessories.Detectors[Id_Detector].Id} Modified to ${Custom_Type}`);
+                                this.DiscoveredAccessories.Detectors[Id_Detector].accessorytype = Custom_Type;
                             });
                         }
                     }
-                }
+                });
             }
             if (((this.Config['Combined'] || 'none') != 'none') && (this.DiscoveredAccessories.Detectors !== undefined) && (this.DiscoveredAccessories.Outputs !== undefined)) {
                 this.DiscoveredAccessories.Combineds = this.PreInitCombined(this.Config['Combined'], UsuableZones, UsuableOutputs);
